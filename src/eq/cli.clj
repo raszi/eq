@@ -47,7 +47,7 @@
 (defn- filter-fn [options filter]
   (let [filter-fn (core/filter-fn filter)]
     (fn [data]
-      (core/pretty-print (filter-fn) options))))
+      (core/pretty-print (filter-fn data) options))))
 
 (defn- execute [filter-fn files]
   (if (seq files)

@@ -7,4 +7,7 @@ pom.xml.asc
 /checkouts/
 .nrepl-port
 .nrepl-history
+.lein-yagni
 .\#*
+/samples
+/json-samples

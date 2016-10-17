@@ -1,7 +1,6 @@
 (def project 'eq)
 
 (set-env! :resource-paths #{"src"}
-          :source-paths   #{"test"}
           :dependencies   '[[org.clojure/clojure "1.8.0"]
                             [org.clojure/tools.cli "0.3.5"]
                             [mvxcvi/puget "1.0.1"]
@@ -26,7 +25,6 @@
       :file (str "eq-" (get-version) ".jar")})
 
 (deftask check-sources []
-  ;; (set-env! :source-paths #{"src" "test"})
   (comp
    (check/with-yagni :options {:entry-points ["eq.cli/-main"]})
    (check/with-eastwood)
@@ -35,15 +33,14 @@
 
 (deftask build
   "Build the project locally as a JAR."
-  [d dir PATH #{str} "the set of directories to write to (target)."]
-  (let [dir (if (seq dir) dir #{"target"})]
-    (comp
-     (aot)
-     (version :include true)
-     (pom)
-     (uber)
-     (jar)
-     (target :dir dir))))
+  []
+  (comp
+   (aot)
+   (version :include true)
+   (pom)
+   (uber)
+   (jar)
+   (target)))
 
 (deftask run
   "Run the project."

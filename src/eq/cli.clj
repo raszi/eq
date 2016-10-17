@@ -40,9 +40,8 @@
 (defn- version
   ([] (version "version.properties"))
   ([file]
-   (get (doto (java.util.Properties.)
-          (.load ^java.io.Reader (io/reader file)))
-        "VERSION")))
+   (with-open [is (io/input-stream (io/resource file))]
+     (get (doto (Properties.) (.load is)) "VERSION"))))
 
 (defn- filter-fn [options filter]
   (let [filter-fn (core/filter-fn filter)]
